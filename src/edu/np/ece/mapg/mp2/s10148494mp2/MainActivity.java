@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,11 +39,20 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		etName = (EditText) this.findViewById(R.id.etName);
+		etEmail = (EditText) this.findViewById(R.id.etEmail);
 		etDate = (EditText) this.findViewById(R.id.etDate);
 		etTime = (EditText) this.findViewById(R.id.etTime);
+		rbCompliment = (RadioButton) this.findViewById(R.id.rbCompliment);
+		rbComplain = (RadioButton) this.findViewById(R.id.rbComplain);
+		cbMobile = (CheckBox) this.findViewById(R.id.cbMobile);
+		cbInternet = (CheckBox) this.findViewById(R.id.cbInternet);
+		btNext = (Button) this.findViewById(R.id.btNext);
+		
 		
 		etDate.setOnClickListener(listener);
 		etTime.setOnClickListener(listener);
+		btNext.setOnClickListener(listenerView);
 	}
 	
 	OnClickListener listener = new OnClickListener(){
@@ -65,6 +75,21 @@ public class MainActivity extends Activity {
 				t.show();
 				break;
 			}
+			
+			
+		}
+	};
+	
+	View.OnClickListener listenerView = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			String strName = etName.getText().toString();
+			String strEmail = etEmail.getText().toString();
+			Intent i = new Intent(getBaseContext(), SecondActivity.class);
+			i.putExtra("Name", strName);
+			i.putExtra("Email", strEmail);
+			startActivity(i);
 		}
 	};
 	
