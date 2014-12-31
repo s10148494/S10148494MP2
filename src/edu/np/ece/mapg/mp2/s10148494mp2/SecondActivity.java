@@ -37,9 +37,15 @@ public class SecondActivity extends Activity {
 		if (i != null){
 			String Name = i.getStringExtra("Name");
 			String Email = i.getStringExtra("Email");
+			String DateTime = i.getStringExtra("DateTime");
+			String RadioBt = i.getStringExtra("RadioBt");
+			String CheckBox = i.getStringExtra("CheckBox");
 			
 			tvName.setText(Name);
 			tvEmail.setText(Email);
+			tvDateTime.setText(DateTime);
+			tvRadioBt.setText(RadioBt);
+			tvCheckBox.setText(CheckBox);
 		}
 	}
 

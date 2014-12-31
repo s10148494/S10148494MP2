@@ -51,8 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date"
-        android:hint="yyyy-MM-dd" />
+        android:hint="yyyy-MM-dd"
+        android:inputType="date" />
 
     <TextView
         android:id="@+id/textView5"
@@ -65,8 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="time"
-        android:hint="hh:mm" />
+        android:hint="hh:mm"
+        android:inputType="time" />
 
     <TextView
         android:id="@+id/textView6"
@@ -74,17 +74,25 @@
         android:layout_height="wrap_content"
         android:text="Feedback Type" />
 
-    <RadioButton
-        android:id="@+id/rbCompliment"
+    <RadioGroup
+        android:id="@+id/rgPurpose"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Compliment" />
+        android:layout_height="wrap_content" >
 
-    <RadioButton
-        android:id="@+id/rbComplain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Complain" />
+        <RadioButton
+            android:id="@+id/rbCompliment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Compliment" />
+
+        <RadioButton
+            android:id="@+id/rbComplain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complain" />
+
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textView7"

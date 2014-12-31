@@ -16,10 +16,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class MainActivity extends Activity {
 	
@@ -27,11 +30,11 @@ public class MainActivity extends Activity {
 	EditText etEmail;
 	EditText etDate;
 	EditText etTime;
-	RadioButton rbCompliment;
-	RadioButton rbComplain;
+	RadioGroup rgPurpose;
 	CheckBox cbMobile;
 	CheckBox cbInternet;
 	Button btNext;
+	
 	
 
 	@Override
@@ -43,17 +46,30 @@ public class MainActivity extends Activity {
 		etEmail = (EditText) this.findViewById(R.id.etEmail);
 		etDate = (EditText) this.findViewById(R.id.etDate);
 		etTime = (EditText) this.findViewById(R.id.etTime);
-		rbCompliment = (RadioButton) this.findViewById(R.id.rbCompliment);
-		rbComplain = (RadioButton) this.findViewById(R.id.rbComplain);
+		rgPurpose = (RadioGroup) this.findViewById(R.id.rgPurpose);
+		rgPurpose.setOnCheckedChangeListener(radiogroupListener);
 		cbMobile = (CheckBox) this.findViewById(R.id.cbMobile);
 		cbInternet = (CheckBox) this.findViewById(R.id.cbInternet);
-		btNext = (Button) this.findViewById(R.id.btNext);
-		
-		
+		btNext = (Button) this.findViewById(R.id.btNext);		
 		etDate.setOnClickListener(listener);
 		etTime.setOnClickListener(listener);
 		btNext.setOnClickListener(listenerView);
+		cbMobile.setOnCheckedChangeListener(checkboxListener);
+		cbInternet.setOnCheckedChangeListener(checkboxListener);
 	}
+	
+	private OnCheckedChangeListener checkboxListener = new OnCheckedChangeListener(){
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+			
+		}
+	};
+	
+	RadioGroup.OnCheckedChangeListener radiogroupListener = new RadioGroup.OnCheckedChangeListener(){
+		@Override
+		public void onCheckedChanged(RadioGroup group, int checkedId){
+			//add toasts as extras
+		}
+	};
 	
 	OnClickListener listener = new OnClickListener(){
 		@Override
@@ -75,8 +91,6 @@ public class MainActivity extends Activity {
 				t.show();
 				break;
 			}
-			
-			
 		}
 	};
 	
@@ -86,9 +100,31 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			String strName = etName.getText().toString();
 			String strEmail = etEmail.getText().toString();
+			String strDateTime = etDate.getText().toString() + ", " + etTime.getText().toString();
+			int checkedId = rgPurpose.getCheckedRadioButtonId();
+			RadioButton rb = (RadioButton) findViewById(checkedId);
+			String strRadioBt = rb.getText().toString();
+			String strCb = null;
+			
+			if(cbMobile.isChecked() && cbInternet.isChecked()){
+				strCb = "Mobile Service, Internet Service";
+			}
+			else if (cbInternet.isChecked()){
+				strCb = "Internet Service";
+			}
+			else{
+				strCb = "Mobile Service";
+			}
+			
+			
 			Intent i = new Intent(getBaseContext(), SecondActivity.class);
+			
 			i.putExtra("Name", strName);
 			i.putExtra("Email", strEmail);
+			i.putExtra("DateTime", strDateTime);
+			i.putExtra("RadioBt", strRadioBt);
+			i.putExtra("CheckBox", strCb);
+			
 			startActivity(i);
 		}
 	};
