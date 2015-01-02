@@ -54,10 +54,13 @@ public class SecondActivity extends Activity {
 	
 	private View.OnClickListener listener = new View.OnClickListener(){
 		public void onClick(View v){
+			
+			
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("text/plain");
 			i.putExtra(Intent.EXTRA_EMAIL, new String[]{ "s10148494@connect.np.edu.sg" });
 			i.putExtra(Intent.EXTRA_SUBJECT, "Service Feedback");
+			i.putExtra("body", tvName.getText() + "\n" + tvEmail.getText() + "\n" + tvDateTime.getText() + "\n" + tvRadioBt.getText() + "\n" + tvCheckBox.getText() + "\n\n" + etFeedback.getText().toString());
 			startActivity(i);
 		}
 	};
