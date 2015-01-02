@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +33,8 @@ public class SecondActivity extends Activity {
 		etFeedback = (EditText) this.findViewById(R.id.etFeedback);
 		btEmail = (Button) this.findViewById(R.id.btEmail);
 		
+		btEmail.setOnClickListener(listener);
+		
 		Intent i = this.getIntent();
 		
 		if (i != null){
@@ -48,6 +51,16 @@ public class SecondActivity extends Activity {
 			tvCheckBox.setText(CheckBox);
 		}
 	}
+	
+	private View.OnClickListener listener = new View.OnClickListener(){
+		public void onClick(View v){
+			Intent i = new Intent(Intent.ACTION_SEND);
+			i.setType("text/plain");
+			i.putExtra(Intent.EXTRA_EMAIL, new String[]{ "s10148494@connect.np.edu.sg" });
+			i.putExtra(Intent.EXTRA_SUBJECT, "Service Feedback");
+			startActivity(i);
+		}
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
