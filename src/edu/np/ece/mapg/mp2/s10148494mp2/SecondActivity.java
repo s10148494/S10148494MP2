@@ -44,18 +44,16 @@ public class SecondActivity extends Activity {
 			String RadioBt = i.getStringExtra("RadioBt");
 			String CheckBox = i.getStringExtra("CheckBox");
 			
-			tvName.setText(Name);
-			tvEmail.setText(Email);
-			tvDateTime.setText(DateTime);
-			tvRadioBt.setText(RadioBt);
-			tvCheckBox.setText(CheckBox);
+			tvName.setText("Name: " + Name);
+			tvEmail.setText("Email: " + Email);
+			tvDateTime.setText("Date: " +DateTime);
+			tvRadioBt.setText("Feedback: " + RadioBt);
+			tvCheckBox.setText("Service: " + CheckBox);
 		}
 	}
 	
 	private View.OnClickListener listener = new View.OnClickListener(){
-		public void onClick(View v){
-			
-			
+		public void onClick(View v){			
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("text/plain");
 			i.putExtra(Intent.EXTRA_EMAIL, new String[]{ "s10148494@connect.np.edu.sg" });

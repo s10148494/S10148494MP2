@@ -17,12 +17,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -60,14 +61,21 @@ public class MainActivity extends Activity {
 	
 	private OnCheckedChangeListener checkboxListener = new OnCheckedChangeListener(){
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-			
+			if(isChecked){
+				Toast.makeText(MainActivity.this, "You have checked " + buttonView.getText().toString(), Toast.LENGTH_SHORT).show();
+			}
 		}
 	};
 	
 	RadioGroup.OnCheckedChangeListener radiogroupListener = new RadioGroup.OnCheckedChangeListener(){
 		@Override
 		public void onCheckedChanged(RadioGroup group, int checkedId){
-			//add toasts as extras
+			if (checkedId == R.id.rbCompliment){
+				Toast.makeText(MainActivity.this,"You have choosen to Complement", Toast.LENGTH_SHORT).show();
+			}
+			else{
+				Toast.makeText(MainActivity.this,"You have choosen to Complain", Toast.LENGTH_SHORT).show();
+			}
 		}
 	};
 	
@@ -124,6 +132,8 @@ public class MainActivity extends Activity {
 			i.putExtra("DateTime", strDateTime);
 			i.putExtra("RadioBt", strRadioBt);
 			i.putExtra("CheckBox", strCb);
+			
+			Toast.makeText(MainActivity.this,"Enter your Feedback", Toast.LENGTH_SHORT).show();
 			
 			startActivity(i);
 		}
