@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
@@ -36,8 +37,6 @@ public class MainActivity extends Activity {
 	CheckBox cbInternet;
 	Button btNext;
 	
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,15 +47,16 @@ public class MainActivity extends Activity {
 		etDate = (EditText) this.findViewById(R.id.etDate);
 		etTime = (EditText) this.findViewById(R.id.etTime);
 		rgPurpose = (RadioGroup) this.findViewById(R.id.rgPurpose);
-		rgPurpose.setOnCheckedChangeListener(radiogroupListener);
+		
 		cbMobile = (CheckBox) this.findViewById(R.id.cbMobile);
 		cbInternet = (CheckBox) this.findViewById(R.id.cbInternet);
 		btNext = (Button) this.findViewById(R.id.btNext);		
 		etDate.setOnClickListener(listener);
 		etTime.setOnClickListener(listener);
-		btNext.setOnClickListener(listenerView);
+		rgPurpose.setOnCheckedChangeListener(radiogroupListener);
 		cbMobile.setOnCheckedChangeListener(checkboxListener);
 		cbInternet.setOnCheckedChangeListener(checkboxListener);
+		btNext.setOnClickListener(listenerView);
 	}
 	
 	private OnCheckedChangeListener checkboxListener = new OnCheckedChangeListener(){
@@ -120,22 +120,40 @@ public class MainActivity extends Activity {
 			else if (cbInternet.isChecked()){
 				strCb = "Internet Service";
 			}
-			else{
+			else if (cbMobile.isChecked()){
 				strCb = "Mobile Service";
 			}
 			
-			
-			Intent i = new Intent(getBaseContext(), SecondActivity.class);
-			
-			i.putExtra("Name", strName);
-			i.putExtra("Email", strEmail);
-			i.putExtra("DateTime", strDateTime);
-			i.putExtra("RadioBt", strRadioBt);
-			i.putExtra("CheckBox", strCb);
-			
-			Toast.makeText(MainActivity.this,"Enter your Feedback", Toast.LENGTH_SHORT).show();
-			
-			startActivity(i);
+			if (strName.length() <= 0){
+				Toast.makeText(MainActivity.this,"Please Enter your Name", Toast.LENGTH_SHORT).show();
+				etName.requestFocus();
+			}
+			else if (strEmail.length() <= 0){
+				Toast.makeText(MainActivity.this,"Please Enter your Email", Toast.LENGTH_SHORT).show();
+				etEmail.requestFocus();
+			}
+			else if (etDate.getText().toString().length() <= 0){
+				Toast.makeText(MainActivity.this,"Please pick a Date", Toast.LENGTH_SHORT).show();
+			}
+			else if (etTime.getText().toString().length() <= 0){
+				Toast.makeText(MainActivity.this,"Please pick a Time", Toast.LENGTH_SHORT).show();
+			}
+			else if (strCb == null){
+				Toast.makeText(MainActivity.this,"Please pick a Service", Toast.LENGTH_SHORT).show();
+			}
+			else{
+				Intent i = new Intent(getBaseContext(), SecondActivity.class);
+				
+				i.putExtra("Name", strName);
+				i.putExtra("Email", strEmail);
+				i.putExtra("DateTime", strDateTime);
+				i.putExtra("RadioBt", strRadioBt);
+				i.putExtra("CheckBox", strCb);
+				
+				Toast.makeText(MainActivity.this,"Enter your Feedback", Toast.LENGTH_SHORT).show();
+				
+				startActivity(i);
+			}
 		}
 	};
 	

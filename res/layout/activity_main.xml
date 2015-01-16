@@ -51,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:focusable="false"
         android:hint="yyyy-MM-dd"
         android:inputType="date" />
 
@@ -65,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:focusable="false"
         android:hint="hh:mm"
         android:inputType="time" />
 
